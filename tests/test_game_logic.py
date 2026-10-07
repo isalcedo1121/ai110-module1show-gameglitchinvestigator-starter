@@ -50,3 +50,21 @@ def test_parse_guess_respects_easy_range():
     ok, value, err = parse_guess("21", 1, 20)
     assert ok is False
     assert value is None
+
+def test_parse_guess_rejects_negative_number():
+    # A negative number parses fine but must still be rejected by the range check
+    ok, value, err = parse_guess("-5", 1, 100)
+    assert ok is False
+    assert value is None
+
+def test_parse_guess_truncates_decimal():
+    # Decimals are converted with int(float(...)), so 50.7 becomes 50
+    assert parse_guess("50.7", 1, 100) == (True, 50, None)
+
+def test_parse_guess_handles_extremely_large_number():
+    # 1e999 becomes float infinity, and int(inf) raises OverflowError;
+    # parse_guess should return an error instead of crashing
+    ok, value, err = parse_guess("1e999", 1, 100)
+    assert ok is False
+    assert value is None
+    assert err == "That is not a number."

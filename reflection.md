@@ -24,11 +24,13 @@ I used ChatGPT and Claude Code to inspect, edit, and test the project code.
 
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 
-Claude suggested moving `check_guess()` into `logic_utils.py` and correcting the reversed high/low hint messages. I reviewed the changes and verified them with pytest tests that checked both directions. All of the tests passed after the fix.
+Claude suggested moving `check_guess()` into `logic_utils.py` and correcting the reversed high/low hint messages. I reviewed the changes and verified them with pytest tests that checked both directions. I also manually tested the game to confirm that guesses above the secret now tell the player to go lower and guesses below the secret tell the player to go higher.
+
+
 
 - Give one example of an AI suggestion you did not accept as written (including what the AI suggested, why you rejected or changed it, and how you verified your version). It does not have to be a suggestion that was wrong: over-engineered, out of scope, harder to read, or a poor fit for this codebase all count.
 
-Claude identified additional problems such as invalid guesses using an attempt, the New Game button always generating a secret from 1–100, and the displayed range being hard-coded to 1–100. I chose not to fix those because they were outside the two bugs I selected for this phase.
+Claude identified additional problems such as invalid guesses using an attempt, the New Game button always generating a secret from 1–100, and the displayed range being hard-coded to 1–100. I chose not to fix those because they were outside the two bugs I selected for this phase. I verified that leaving those issues unchanged did not interfere with my selected fixes by running the tests and manually checking the repaired behavior in the game.
 
 ---
 
@@ -41,7 +43,7 @@ I considered a bug fixed after reviewing the code changes, running the automated
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
 
-I ran pytest and all 7 tests passed. One test checked that guessing `60` when the secret is `50` gives a "Too High" outcome and tells the player to go lower. I also manually entered `0` in the Streamlit game and confirmed that it was rejected with a message saying the guess must be between 1 and 100.
+I initially ran pytest and all 7 tests passed. One test checked that guessing 60 when the secret is 50 gives a “Too High” outcome and tells the player to go lower. I also manually entered 0 in the Streamlit game and confirmed that it was rejected with a message saying the guess must be between 1 and 100. I later added three edge-case tests for Challenge 1, bringing the total to 10 passing tests.
 
 - Did AI help you design or understand any tests? How?
 

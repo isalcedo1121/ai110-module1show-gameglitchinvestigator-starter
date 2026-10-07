@@ -43,7 +43,21 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 🧪 Test Results
 
-All 7 automated tests passed using pytest.
+All 10 automated tests passed using pytest, including three additional edge-case tests for Challenge 1.
+
+```text
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/ivansalcedo/repos/ai110-module1show-gameglitchinvestigator-starter
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.15.1
+collected 10 items
+
+tests/test_game_logic.py ..........                                      [100%]
+
+============================== 10 passed in 0.02s ==============================
+```
 
 ## 🚀 Stretch Features
 
